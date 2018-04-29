@@ -4,9 +4,6 @@
   "version": "0.0.1",
   "description": "AngularJS Starter",
   "private": true,
-  "scripts": {
-    "postinstall": "node ./node_modules/bower/bin/bower install"
-  },
   "dependencies": {
     "jquery": "2.2.4",
     "bootstrap": "3.2.0",
