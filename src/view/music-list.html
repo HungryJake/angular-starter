@@ -1,0 +1,29 @@
+<section class="music-list">
+    <h3>Published Music List</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">track Name</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Album</th>
+                <th scope="col">Duration(ms)</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="track in tracks">
+                <th scope="row">{{track.name}}</th>
+                <td>{{track.artist}}</td>
+                <td>{{track.album}}</td>
+                <td>{{track.duration}}</td>
+                <td class="form-group">
+                    <a ng-click="edit(track.id)">Edit</a>
+                </td>
+                <td class="form-group">
+                    <a ng-click="remove(track.id)">Remove</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
