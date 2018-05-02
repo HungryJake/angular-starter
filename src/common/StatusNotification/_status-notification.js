@@ -1,4 +1,4 @@
-angular.module('Common.StatusNotification', [])
+angular.module('StatusNotification', [])
     .config(function() {
         // configure
     })
