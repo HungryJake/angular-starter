@@ -1,0 +1,57 @@
+<div class="container todo-app">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="list-group">
+                <a ng-repeat="todos in model" class="list-group-item" ng-class="{'active' : currentShow === $index}" ng-click="changeTodo($index)" >
+                    <span class="badge">{{todos.list.length}}</span>
+                    {{ todos.name }}
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-5">
+                    <ul class="nav nav-pills todo-filter">
+                        <li ng-class="{'active': show === 'All' }"><a ng-click="show='All'">All</a></li>
+                        <li ng-class="{'active': show === 'Incomplete' }"><a ng-click="show='Incomplete'">Incomplete</a></li>
+                        <li ng-class="{'active': show === 'Complete' }"><a ng-click="show='Complete'">Complete</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                    <div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+							</span>
+                        <input type="search" class="form-control" placeholder="Search" ng-model="todoSearch">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="list-group todo-list" ng-repeat="todos in model track by $index" ui-sortable="todoSortable" ng-model="todos.list" ng-show="$index === currentShow">
+                    <li class="list-group-item" ng-repeat="todo in todos.list | filter:showFn | filter :todoSearch ">
+                        <input class="todoCheckbox" ng-model="todo.isDone" type="checkbox">
+                        <label class="todoCheckboxlabel" ></label>
+                        <edit-in-place value="todo.taskName"></edit-in-place>
+                        <button type="button" class="close pull-right" aria-hidden="true" ng-click="deleteTodo(todo)">&times;</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 input-group add-new-group">
+                    <input class="form-control" type="text" ng-model="newTodo" placeholder="Add New Todo" ng-enter aria-label="Add New Todo Label" >
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="addTodo()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="row">
+        <div class="debug">
+            <p class="text-info">{{ model | json}}</p>
+        </div>
+    </div>
+    -->
+</div>

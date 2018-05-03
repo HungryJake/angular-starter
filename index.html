@@ -9,22 +9,10 @@
 	<title>AngularJS Starter Template</title>
 </head>
 <body ng-app="app">
-    <div class="container">
-        <!-- Static navbar -->
-        <div class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand active" ui-sref="list" ui-sref-active="active">Music Publisher</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a ui-sref="new">Publish New</a></li>
-                    </ul>
-                </div>
-            </div><!--/.container-fluid -->
-        </div>
-        <div ui-view></div>
-    </div> <!-- /container -->
+    <main role="main">
+        <div ng-include="'view/navigation.html'"></div>
+        <div ui-view class="app-container"></div>
+    </main> <!-- /container -->
 </body>
 <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
 <script type="text/javascript" src="<%= file %>"></script><% }); %>

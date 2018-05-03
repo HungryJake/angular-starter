@@ -20,19 +20,26 @@ module.exports = function (grunt) {
 
     var dependencies = {
         js: [
-            // 'node_modules/jquery/dist/jquery.js',
-            // 'node_modules/bootstrap/dist/js/bootstrap.js',
+            'node_modules/jquery/dist/jquery.js',
+            'legacy/jquery-ui/jquery-ui.min.js',
+            'legacy/jquery-ui/jquery-ui-punch.min.js',
+            'node_modules/bootstrap/dist/js/bootstrap.js',
             'node_modules/angular/angular.js',
-            'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
+            'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
             'node_modules/angular-ui-router/release/angular-ui-router.js',
             'node_modules/angular-cookies/angular-cookies.js',
+            'node_modules/angular-local-storage/dist/angular-local-storage.js',
             'node_modules/angular-resource/angular-resource.js',
-            'node_modules/angular-animate/angular-animate.js'
+            'node_modules/angular-animate/angular-animate.js',
+            'node_modules/angular-ui-sortable/dist/sortable.js'
         ],
         css: [
             'node_modules/angular/angular-csp.css',
             'node_modules/bootstrap/dist/css/bootstrap.css',
             'node_modules/bootstrap/dist/css/bootstrap-theme.css'
+        ],
+        fonts: [
+            'node_modules/bootstrap/dist/fonts/**/*.*'
         ]
     };
 
@@ -84,6 +91,25 @@ module.exports = function (grunt) {
                 }]
             },
 
+            build_vendor_fonts: {
+                files: [{
+                    src: '<%= dependencies.fonts %>',
+                    dest: 'public/',
+                    cwd: '.',
+                    expand: true
+                }]
+            },
+
+            flatten_vendor_fonts: {
+                files: [{
+                    src: '<%= dependencies.fonts %>',
+                    dest: 'public/fonts',
+                    cwd: '.',
+                    flatten: true,
+                    expand: true
+                }]
+            },
+
             build_src_js: {
                 files: [{
                     src: '<%= app_files.js %>',
@@ -95,13 +121,12 @@ module.exports = function (grunt) {
 
             build_assets: {
                 files: [{
-                    src: ['assets/**/*.*'],
+                    src: 'assets/**/*.*',
                     dest: 'public/',
                     cwd: '.',
                     expand: true
                 }]
             }
-
         },
 
         uglify: {
@@ -118,7 +143,7 @@ module.exports = function (grunt) {
         less: {
             compile: {
                 files: {
-                    'public/styles.css': 'src/less/**/*.less'
+                    'public/styles.css': 'less/**/*.less'
                 }
             },
             options: {
@@ -218,7 +243,7 @@ module.exports = function (grunt) {
              */
             assets: {
                 files: [
-                    'src/assets/**/*.*'
+                    'assets/**/*.*'
                 ],
                 tasks: ['copy:build_assets']
             },
@@ -231,8 +256,8 @@ module.exports = function (grunt) {
             },
 
             less: {
-                files: ['src/**/*.less'],
-                tasks: ['less:compile']
+                files: ['less/**/*.less'],
+                tasks: ['less:compile', 'concat:compile_css']
             },
 
             index: {
@@ -325,6 +350,7 @@ module.exports = function (grunt) {
             'jshint',
             'copy:build_vendor_js',
             'copy:build_vendor_css',
+            'copy:build_vendor_fonts',
             'copy:build_src_js',
             'copy:build_assets',
             'less:compile',
@@ -341,6 +367,21 @@ module.exports = function (grunt) {
             'copy:build_vendor_css',
             'copy:build_src_js',
             'copy:build_assets',
+            'copy:flatten_vendor_fonts',
+            'less:compile',
+            'compile',
+            'index:compile'
+        ]
+    );
+
+    grunt.registerTask('build_dist',
+        [
+            'clean',
+            'html2js',
+            'jshint',
+            'copy:build_src_js',
+            'copy:build_assets',
+            'copy:flatten_vendor_fonts',
             'less:compile',
             'compile',
             'index:compile'
@@ -349,4 +390,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('dev', ['build_dev', 'connect:server', 'watch']);
     grunt.registerTask('test', ['build_test', 'connect:server', 'watch']);
+    grunt.registerTask('dist', ['build_dist']);
+    grunt.registerTask('try', []);
 };

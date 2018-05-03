@@ -3,8 +3,8 @@ angular.module('app', [
     'templates-app',
     'ui.router',
     'ngResource',
-    'StatusNotification'
-  ])
-  .run(function () {
-    console.log('here..... app.js');
-  });
+    'StatusNotification',
+    'editInPlace',
+    'app.music',
+    'app.todo'
+  ]);

@@ -1,0 +1,8 @@
+<section class='notifications' ng-show="alerts.length > 0">
+    <div uib-alert
+         ng-repeat="alert in alerts"
+         ng-class="'alert-' + (alert.type || 'warning')"
+         close="dismissAlert($index)">
+        {{alert.msg}}
+    </div>
+</section>
