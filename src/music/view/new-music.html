@@ -1,27 +1,131 @@
-<section class="new-track">
-    <h3 ng-if="!isEdit">Create New Track</h3>
-    <h3 ng-if="isEdit">Editing: {{track.name}}</h3>
+<section class="track-details">
+    <h3>Create New Track</h3>
     <div class="row col-sm-6">
-        <form role="form" class="new-music-form">
-            <div class="form-group">
+        <form name="musicForm" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' : musicForm.name.$invalid && !musicForm.name.$pristine }">
                 <label for="song">Track Name</label>
-                <input type="text" class="form-control" id="song" ng-model="track.name" placeholder="Enter track name">
+                <input type="text" class="form-control" name="name" ng-model="track.name" placeholder="Enter track name" required>
+                <p ng-show="musicForm.name.$invalid && !musicForm.name.$pristine" class="help-block">Not a valid track name.</p>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : musicForm.artist.$invalid && !musicForm.artist.$pristine }">
                 <label for="artist">Artist</label>
-                <input type="text" class="form-control" id="artist" ng-model="track.artist" placeholder="Artist">
+                <input type="text" class="form-control" name="artist" ng-model="track.artist" placeholder="Artist" required>
+                <p ng-show="musicForm.artist.$invalid && !musicForm.artist.$pristine" class="help-block">Not a valid artist name.</p>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : musicForm.album.$invalid && !musicForm.album.$pristine }">
                 <label for="album">Album</label>
-                <input type="text" class="form-control" id="album" ng-model="track.album" placeholder="Album">
+                <input type="text" class="form-control" name="album" ng-model="track.album" placeholder="Album" required>
+                <p ng-show="musicForm.album.$invalid && !musicForm.album.$pristine" class="help-block">Not a valid album name.</p>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' : musicForm.duration.$invalid && !musicForm.duration.$pristine }">
                 <label for="duration">Duration (ms)</label>
-                <input type="text" class="form-control" id="duration" ng-model="track.duration" placeholder="0">
-                <p class="help-block">Duration of the track in milliseconds.</p>
+                <input type="text" name="duration" class="form-control" id="duration" ng-model="track.duration" placeholder="0" ng-min="0" ng-max="1000000000000" required>
+                <p>Duration of the track in milliseconds.</p>
+                <p ng-show="musicForm.duration.$invalid && !musicForm.duration.$pristine" class="help-block">Enter a valid positive integer.</p>
+                <p ng-show="musicForm.duration.$error.min && !musicForm.duration.$pristine" class="help-block">Minimum 0 seconds.</p>
+                <p ng-show="musicForm.duration.$error.max && !musicForm.duration.$pristine" class="help-block">It's way too long</p>
             </div>
-            <button type="submit" class="btn btn-primary" ng-click="onSubmit()">Submit</button>
-            <button type="reset" class="btn btn-default" ng-click="onReset()">Reset</button>
+            <button type="submit" class="btn btn-primary" ng-click="onSubmit()" >Submit</button>
+            <button class="btn btn-default" ng-click="onReset()">Reset</button>
         </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- VALIDATION TABLES ======== -->
+            <div class="row">
+                <div class="col-xs-2">
+                    <h3>Form</h3>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td ng-class="{ success: musicForm.$valid, danger: musicForm.$invalid }">Valid</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.$pristine, danger: !musicForm.$pristine }">Pristine</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.$dirty }">Dirty</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-2">
+                    <h3>Name</h3>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td ng-class="{ success: musicForm.name.$valid, danger: musicForm.name.$invalid }">Valid</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.name.$pristine, danger: !musicForm.name.$pristine }">Pristine</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.name.$dirty }">Dirty</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.name.$touched }">Touched</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-2">
+                    <h3>Artist</h3>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td ng-class="{ success: musicForm.artist.$valid, danger: musicForm.artist.$invalid }">Valid</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.artist.$pristine, danger: !musicForm.artist.$pristine }">Pristine</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.artist.$dirty }">Dirty</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.artist.$touched }">Touched</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-2">
+                    <h3>Album</h3>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td ng-class="{ success: musicForm.album.$valid, danger: musicForm.album.$invalid }">Valid</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.album.$pristine, danger: !musicForm.album.$pristine }">Pristine</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.album.$dirty }">Dirty</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.album.$touched }">Touched</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-2">
+                    <h3>Duration</h3>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td ng-class="{ success: musicForm.duration.$valid, danger: musicForm.duration.$invalid }">Valid</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.duration.$pristine, danger: !musicForm.duration.$pristine }">Pristine</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.duration.$dirty }">Dirty</td>
+                        </tr>
+                        <tr>
+                            <td ng-class="{ success: musicForm.duration.$touched }">Touched</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

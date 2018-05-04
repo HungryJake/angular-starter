@@ -8,19 +8,19 @@ angular.module('app.music', [
     .config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
         $urlRouterProvider.otherwise("/list");
         $stateProvider
-            .state('app.music.list', {
-                url: '/list',
+            .state('music.list', {
+                url: '/music/list',
                 controller: 'MusicListController',
                 templateUrl: 'music/view/music-list.html'
             })
-            .state('app.music.new', {
-                url: '/new',
+            .state('music.new', {
+                url: '/music/new',
                 controller: 'NewMusicController',
-                templateUrl: 'music/view/music-list.html'
+                templateUrl: 'music/view/new-music.html'
             })
-            .state('app.music.edit', {
-                url: '/edit/:id',
+            .state('music.edit', {
+                url: '/music/edit/:id',
                 controller: 'NewMusicController',
-                templateUrl: 'music/view/music-list.html'
+                templateUrl: 'music/view/new-music.html'
             });
     }]);

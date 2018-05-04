@@ -1,7 +1,6 @@
 angular.module('NgEnter', [])
     .directive("ngEnter", function  () {
         return function (scope, elem) {
-            console.log('ng enter link function....');
             $(elem).keyup(function  (e) {
                 //Enter Keycode is 13
                 if (e.keyCode === 13) {

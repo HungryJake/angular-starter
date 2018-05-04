@@ -1,4 +1,4 @@
-angular.module("app.todo", ["ui.sortable", "LocalStorageModule"])
+angular.module("app.todo")
     .controller("TodoController", function ($scope, localStorageService) {
         $scope.model = angular.fromJson(localStorageService.get("todoList"));
         if (!$scope.model) {

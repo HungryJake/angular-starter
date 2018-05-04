@@ -1,5 +1,5 @@
 angular.module('editInPlace', [])
-    .directive( 'editInPlace', function() {
+    .directive('editInPlace', function() {
         return {
             restrict: 'E',
             scope: { value: '=' },

@@ -5,16 +5,16 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a ui-sref="todo" ui-sref-active="active">TODO<span class="sr-only">(current)</span></a>
+                <li ui-sref-active="active">
+                    <a ui-sref="todo.list">TODO<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-class="{ 'active': $state.includes('music') }">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Music Publisher <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a ui-sref="app.music.list" ui-sref-active="active">List Published</a></li>
-                        <li><a ui-sref="app.music.new" ui-sref-active="active">New Publish</a></li>
+                        <li ui-sref-active="active"><a ui-sref="music.list">List Published</a></li>
+                        <li ui-sref-active="active"><a ui-sref="music.new">New Publish</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,3 +1,3 @@
 angular.module('app')
-    .controller('AppController', function($scope) {
-    });
+    .controller('AppController', ['$state', function($state) {
+    }]);

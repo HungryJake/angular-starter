@@ -1,20 +1,28 @@
-angular.module('app')
+angular.module('app', [
+        'ui.bootstrap',
+        'templates-app',
+        'ui.router',
+        'ngResource',
+        'LocalStorageModule',
+        'StatusNotification',
+        'app.todo',
+        'app.music'
+    ])
     .config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
         $urlRouterProvider.otherwise("/welcome");
         $stateProvider
             .state('welcome', {
                 url: '/welcome',
-                controller: 'AppController',
                 templateUrl: 'view/welcome.html'
             })
             .state('todo', {
-                url: '/todo',
-                controller: 'TodoController',
-                templateUrl: 'todo/view/todo-list.html'
+                abstract: true
             })
             .state('music', {
-                url: '/music',
-                controller: 'MusicController',
-                templateUrl: 'music/view/music-list.html'
+                abstract: true
             });
+    }])
+    .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
     }]);

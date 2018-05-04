@@ -1,9 +1,4 @@
-angular.module('app.todo', [
-        'ui.bootstrap',
-        'templates-app',
-        'ui.router',
-        'NgEnter'
-    ])
+angular.module('app.todo', ["ui.sortable", "LocalStorageModule", 'editInPlace', 'ngEnter'])
     .config([
         'localStorageServiceProvider',
         '$urlRouterProvider',
@@ -19,5 +14,5 @@ angular.module('app.todo', [
                 controller: 'TodoController',
                 templateUrl: 'todo/view/todo-list.html'
             });
-        localStorageServiceProvider.setPrefix('todo');
+            localStorageServiceProvider.setPrefix('todo');
     }]);
