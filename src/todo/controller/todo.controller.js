@@ -54,7 +54,6 @@ angular.module("app.todo")
         $scope.changeTodo = function (i) {
             $scope.currentShow = i;
         };
-
         /* Filter Function for All | Incomplete | Complete */
         $scope.showFn = function (todo) {
             if ($scope.show === "All") {

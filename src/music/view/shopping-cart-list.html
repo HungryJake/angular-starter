@@ -1,0 +1,27 @@
+<section class="music-list">
+    <h3>Shopping Cart List</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Inventory</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <th scope="row">{{item.name}}</th>
+                <td>{{item.artist}}</td>
+                <td>{{item.album}}</td>
+                <td>{{item.duration}}</td>
+                <td class="form-group">
+                    <a ng-click="edit(item.id)">Edit</a>
+                </td>
+                <td class="form-group">
+                    <a ng-click="remove(item.id)">Remove</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>

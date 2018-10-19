@@ -5,8 +5,7 @@ angular.module('app', [
         'ngResource',
         'LocalStorageModule',
         'StatusNotification',
-        'app.todo',
-        'app.music'
+        'app.todo'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
         $urlRouterProvider.otherwise("/welcome");
